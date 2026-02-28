@@ -14,7 +14,7 @@ env:
 
 jobs:
   docker:
-    runs-on: warp-ubuntu-latest-x64-2x
+    runs-on: warp-docker-builder
     permissions:
       contents: read
     steps:
