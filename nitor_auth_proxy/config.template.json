@@ -1,0 +1,49 @@
+{
+  "publicURI": "__PUBLIC_URI__",
+  "adAuth": {
+    "route": "/*",
+    "clientId": "__ENTRA_CLIENT_ID__",
+    "clientSecret": "__ENTRA_CLIENT_SECRET__",
+    "configurationURI": "__ENTRA_CONFIGURATION_URI__",
+    "scope": "__ENTRA_SCOPE__",
+    "graphQueries": [
+      {
+        "graphQueryURI": "https://graph.microsoft.com/beta/me",
+        "headerMappings": {
+          "x-ha-name": ".displayName",
+          "x-ha-user": ".mail",
+          "x-ha-id": ".id"
+        }
+      },
+      {
+        "graphQueryURI": "https://graph.microsoft.com/v1.0/me/transitiveMemberOf?$top=200",
+        "headerMappings": {
+          "x-ha-groups": ".value[].mailNickname"
+        }
+      }
+    ],
+    "requiredHeaders": {
+      "x-ha-groups": "__ALLOWED_GROUPS_REGEX__"
+    }
+  },
+  "defaultAuthType": "ad",
+  "session": {
+    "serverName": "__SESSION_SERVER_NAME__",
+    "secretFile": "__COOKIE_SECRET_PATH__",
+    "sessionAge": "__SESSION_AGE__"
+  },
+  "tls": {
+    "serverKey": "__TLS_KEY_PATH__",
+    "serverCert": "__TLS_CERT_PATH__"
+  },
+  "services": [
+    {
+      "type": "proxy",
+      "route": "/*",
+      "host": "__UPSTREAM_HOST__",
+      "port": "__UPSTREAM_PORT__",
+      "ssl": "__UPSTREAM_SSL__",
+      "path": "__UPSTREAM_PATH__"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+name: Nitor Auth Proxy
+version: "0.1.0"
+slug: nitor_auth_proxy
+description: Nitor Java auth proxy for Home Assistant SSO
+url: https://github.com/NitorCreations/ha-nitor-backend
+image: docker.io/nitor/ha-nitor-backend:latest
+arch:
+  - amd64
+init: false
+startup: application
+map:
+  - addon_config:rw
+  - ssl:ro
+ports:
+  8088/tcp: 443
+ports_description:
+  8088/tcp: HTTPS proxy endpoint (mapped to host 443)
+options:
+  public_uri: https://ha.example.com
+  session_server_name: ha.example.com
+  session_age: 1209600
+  cookie_secret_path: /data/auth-cookie-secret
+  cookie_secret_length: 256
+  listen_port: 8088
+  ssl: true
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+  allowed_groups_regex: "(^|.*,)Nitor-Staff(,.*|$)"
+  entra_client_id: ""
+  entra_client_secret: ""
+  entra_configuration_uri: ""
+  entra_scope: "openid profile offline_access"
+  upstream_host: homeassistant
+  upstream_port: 8123
+  upstream_ssl: false
+  upstream_path: /
+schema:
+  public_uri: str
+  session_server_name: str
+  session_age: int
+  cookie_secret_path: str
+  cookie_secret_length: int
+  listen_port: int
+  ssl: bool
+  certfile: str
+  keyfile: str
+  allowed_groups_regex: str
+  entra_client_id: str
+  entra_client_secret: password
+  entra_configuration_uri: str
+  entra_scope: str
+  upstream_host: str
+  upstream_port: int
+  upstream_ssl: bool
+  upstream_path: str
