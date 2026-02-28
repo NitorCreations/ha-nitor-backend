@@ -33,6 +33,7 @@ These map to proxy config:
 
 ## Security notes
 
+- The add-on process runs as root to ensure read access to `/data/options.json` in Home Assistant Supervisor runtime.
 - Keep Home Assistant `8123` blocked from external clients.
 - Trust proxy headers only from this add-on source in `trusted_proxies`.
 - Do not store app secrets in git or Docker image layers.

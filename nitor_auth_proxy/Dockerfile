@@ -7,8 +7,6 @@ RUN apt-get update \
 
 COPY run.sh /run.sh
 COPY config.template.tmpl /app/config.template.tmpl
-RUN chmod +x /run.sh && chown user:user /run.sh /app/config.template.tmpl
-
-USER user
+RUN chmod +x /run.sh
 ENV PORT=8088
 ENTRYPOINT ["/run.sh"]
