@@ -10,6 +10,7 @@ Home Assistant add-on wrapping the Nitor Java backend proxy for SSO and header-b
 - Persistent cookie secret generated on first boot (`/data/auth-cookie-secret` by default).
 - Optional TLS termination from Home Assistant `/ssl` (`certfile`, `keyfile`).
 - HA-compatible CSP override is set in template to allow frontend inline boot scripts.
+- `virtualHost` is set to `false` in the generated proxy config (single-host app flow).
 
 ## Required add-on options
 
