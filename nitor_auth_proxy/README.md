@@ -11,6 +11,7 @@ Home Assistant add-on wrapping the Nitor Java backend proxy for SSO and header-b
 - Optional TLS termination from Home Assistant `/ssl` (`certfile`, `keyfile`).
 - HA-compatible CSP override is set in template to allow frontend inline boot scripts.
 - `virtualHost` is set to `false` in the generated proxy config (single-host app flow).
+- Proxy websocket limits are set to 8 MiB in generated service config to support larger Home Assistant frames.
 
 ## Required add-on options
 
