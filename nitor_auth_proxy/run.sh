@@ -2,7 +2,7 @@
 set -euo pipefail
 
 OPTIONS_FILE="/data/options.json"
-TEMPLATE_FILE="/app/config.template.json"
+TEMPLATE_FILE="/app/config.template.tmpl"
 OUTPUT_FILE="/tmp/config.json"
 
 if [[ ! -f "${OPTIONS_FILE}" ]]; then

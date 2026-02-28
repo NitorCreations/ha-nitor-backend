@@ -55,3 +55,16 @@ Adjust `trusted_proxies` to the actual source network/address that reaches Home 
 - User can log in through proxy and is mapped to a unique HA user.
 - Unauthorized groups are denied before reaching Home Assistant.
 - Direct `8123` access from normal clients is blocked.
+
+## Release and image publishing
+
+Docker image publishing is release-driven.
+
+1. Bump add-on version in `nitor_auth_proxy/config.yaml` (for example `0.2.0`).
+2. Commit and push to `main`.
+3. Create a GitHub release with tag `vX.Y.Z` that matches add-on version exactly.
+4. Workflow `Build and Publish Add-on Image` publishes:
+   - `docker.io/nitor/ha-nitor-backend:X.Y.Z`
+   - `docker.io/nitor/ha-nitor-backend:latest` (non-prerelease releases)
+
+If release tag and add-on version do not match, publishing fails by design.

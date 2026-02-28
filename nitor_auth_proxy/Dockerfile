@@ -6,8 +6,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /run.sh
-COPY config.template.json /app/config.template.json
-RUN chmod +x /run.sh && chown user:user /run.sh /app/config.template.json
+COPY config.template.tmpl /app/config.template.tmpl
+RUN chmod +x /run.sh && chown user:user /run.sh /app/config.template.tmpl
 
 USER user
 ENV PORT=8088

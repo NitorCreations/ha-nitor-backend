@@ -1,12 +1,9 @@
 name: Build and Publish Add-on Image
 
 on:
-  push:
-    branches:
-      - main
-    tags:
-      - "v*"
-  workflow_dispatch:
+  release:
+    types:
+      - published
 
 env:
   IMAGE_NAME: nitor/ha-nitor-backend
@@ -20,6 +17,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve and validate release version
+        id: version
+        shell: bash
+        run: |
+          ADDON_VERSION="$(awk -F'"' '/^version:/{print $2}' "${CONTEXT_DIR}/config.yaml")"
+          if [[ -z "${ADDON_VERSION}" ]]; then
+            echo "Failed to parse add-on version from ${CONTEXT_DIR}/config.yaml"
+            exit 1
+          fi
+
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+
+          EXPECTED_TAG="v${ADDON_VERSION}"
+          if [[ "${RELEASE_TAG}" != "${EXPECTED_TAG}" ]]; then
+            echo "Release tag (${RELEASE_TAG}) must match add-on version (${EXPECTED_TAG})."
+            exit 1
+          fi
+
+          echo "addon_version=${ADDON_VERSION}" >> "${GITHUB_OUTPUT}"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -36,10 +53,8 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=tag
-            type=sha,prefix=sha-
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ steps.version.outputs.addon_version }}
+            type=raw,value=latest,enable=${{ github.event.release.prerelease == false }}
 
       - name: Build and push image
         uses: docker/build-push-action@v6
