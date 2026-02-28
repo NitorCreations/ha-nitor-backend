@@ -18,6 +18,7 @@ Home Assistant add-on wrapping the Nitor Java backend proxy for SSO and header-b
 - `entra_client_id`
 - `entra_client_secret`
 - `entra_configuration_uri`
+- `aws_region` (required by AWS SDK initialization; default `eu-west-1`)
 
 ## TLS configuration
 

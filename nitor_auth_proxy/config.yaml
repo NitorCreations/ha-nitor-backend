@@ -1,5 +1,5 @@
 name: Nitor Auth Proxy
-version: "0.1.1"
+version: "0.1.2"
 slug: nitor_auth_proxy
 description: Nitor Java auth proxy for Home Assistant SSO
 url: https://github.com/NitorCreations/ha-nitor-backend
@@ -20,7 +20,7 @@ options:
   session_server_name: ha.example.com
   session_age: 1209600
   cookie_secret_path: /data/auth-cookie-secret
-  cookie_secret_length: 256
+  cookie_secret_length: 64
   listen_port: 8088
   ssl: true
   certfile: fullchain.pem
@@ -34,6 +34,7 @@ options:
   upstream_port: 8123
   upstream_ssl: false
   upstream_path: /
+  aws_region: eu-west-1
 schema:
   public_uri: str
   session_server_name: str
@@ -53,3 +54,4 @@ schema:
   upstream_port: int
   upstream_ssl: bool
   upstream_path: str
+  aws_region: str
