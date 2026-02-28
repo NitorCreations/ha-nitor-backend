@@ -9,6 +9,7 @@ Home Assistant add-on wrapping the Nitor Java backend proxy for SSO and header-b
 - Runtime-only secret injection for Entra client secret.
 - Persistent cookie secret generated on first boot (`/data/auth-cookie-secret` by default).
 - Optional TLS termination from Home Assistant `/ssl` (`certfile`, `keyfile`).
+- HA-compatible CSP override is set in template to allow frontend inline boot scripts.
 
 ## Required add-on options
 

@@ -26,6 +26,9 @@
       "x-ha-groups": "__ALLOWED_GROUPS_REGEX__"
     }
   },
+  "defaultHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https: wss:; font-src 'self' data:;"
+  },
   "defaultAuthType": "ad",
   "session": {
     "serverName": "__SESSION_SERVER_NAME__",
