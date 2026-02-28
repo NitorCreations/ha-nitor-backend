@@ -1,4 +1,4 @@
-FROM nitor/nitor-backend:1.38.35
+FROM nitor/nitor-backend:1.38.36
 
 USER root
 RUN apt-get update \
